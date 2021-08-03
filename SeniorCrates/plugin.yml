@@ -1,0 +1,8 @@
+name: SeniorCrates
+version: 1.0
+api-version: 1.8.8
+main: com.scrates.main.SeniorCrates
+author: Unfairbody96
+commands:
+  crate:
+    description: Crates main command

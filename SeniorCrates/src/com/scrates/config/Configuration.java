@@ -1,0 +1,7 @@
+package com.scrates.config;
+
+public enum Configuration {
+
+	MESSAGES, PERMISSIONS, COOLDOWN, CONFIGS, RGBCOLOURS, PETS, SHOP, INVENTORIES, EGGSTATS, SETTINGS, BLACKLISTED, EGGDATA, GUI;
+	
+}
