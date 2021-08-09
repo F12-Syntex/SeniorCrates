@@ -4,9 +4,9 @@ package com.scrates.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.scrates.GUI.GUI;
 import com.scrates.config.ConfigManager;
 import com.scrates.data.Crate;
+import com.scrates.gui.GUI;
 import com.scrates.main.SeniorCrates;
 import com.scrates.utils.MessageUtils;
 
@@ -31,7 +31,7 @@ public class Edit extends SubCommand {
     	
     	Crate targetCrate = configManager.crates.getCrate(crate);
     	
-    	GUI edit = new com.scrates.GUI.Edit(player, targetCrate);
+    	GUI edit = new com.scrates.gui.Edit(player, targetCrate);
     	edit.open();
     	
     }

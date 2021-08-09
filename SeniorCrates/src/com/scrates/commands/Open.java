@@ -4,10 +4,10 @@ package com.scrates.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.scrates.GUI.Action;
-import com.scrates.GUI.Confirmation;
-import com.scrates.GUI.GUI;
 import com.scrates.config.ConfigManager;
+import com.scrates.gui.Action;
+import com.scrates.gui.Confirmation;
+import com.scrates.gui.GUI;
 import com.scrates.main.SeniorCrates;
 import com.scrates.utils.MessageUtils;
 
@@ -37,7 +37,7 @@ public class Open extends SubCommand {
 				if(configManager.crates.exists(name)) {
 					configManager.messages.send(player, "open_completed");
 					
-					GUI open = new com.scrates.GUI.Open(player, configManager.crates.getCrate(name));
+					GUI open = new com.scrates.gui.Open(player, configManager.crates.getCrate(name));
 					open.open();
 					
 					

@@ -4,11 +4,11 @@ package com.scrates.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.scrates.GUI.Action;
-import com.scrates.GUI.Confirmation;
-import com.scrates.GUI.GUI;
 import com.scrates.config.ConfigManager;
 import com.scrates.data.Crate;
+import com.scrates.gui.Action;
+import com.scrates.gui.Confirmation;
+import com.scrates.gui.GUI;
 import com.scrates.main.SeniorCrates;
 import com.scrates.utils.MessageUtils;
 

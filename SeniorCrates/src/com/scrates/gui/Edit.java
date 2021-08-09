@@ -1,4 +1,4 @@
-package com.scrates.GUI;
+package com.scrates.gui;
 
 import java.util.HashMap;
 import java.util.Map;

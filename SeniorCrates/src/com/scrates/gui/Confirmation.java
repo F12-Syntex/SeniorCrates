@@ -1,4 +1,4 @@
-package com.scrates.GUI;
+package com.scrates.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;

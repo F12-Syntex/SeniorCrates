@@ -1,4 +1,4 @@
-package com.scrates.GUI;
+package com.scrates.gui;
 
 public interface Action {
 	public abstract void accept();

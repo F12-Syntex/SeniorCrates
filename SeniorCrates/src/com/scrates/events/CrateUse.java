@@ -6,9 +6,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.scrates.GUI.Open;
 import com.scrates.config.Messages;
 import com.scrates.data.Crate;
+import com.scrates.gui.Open;
 import com.scrates.main.SeniorCrates;
 import com.scrates.placeholder.time.TimeFormater;
 import com.scrates.tags.PlaceHolders;
