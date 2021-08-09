@@ -24,8 +24,15 @@ public abstract class GUI implements Listener{
 	
 	public GUI(Player player) {
 		this.player = player;
-		SeniorCrates.instance.getServer().getPluginManager().registerEvents(this, SeniorCrates.instance);
+		SeniorCrates.getInstance().getServer().getPluginManager().registerEvents(this, SeniorCrates.getInstance());
 		inv = Bukkit.createInventory(this.player, size(), name());
+		this.messages = SeniorCrates.getInstance().configManager.messages;
+	}
+	
+	public GUI(Player player, int size) {
+		this.player = player;
+		SeniorCrates.getInstance().getServer().getPluginManager().registerEvents(this, SeniorCrates.getInstance());
+		inv = Bukkit.createInventory(this.player, size, name());
 		this.messages = SeniorCrates.getInstance().configManager.messages;
 	}
 	

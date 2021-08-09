@@ -15,8 +15,8 @@ import com.scrates.utils.MappyObject;
 public class Cooldown extends Config{
 
 	public List<HashMap<String, Integer>> commands;
-	public String coding = "&a%time%&7(&6%shortname%&7)"; 
-	public int complexity = 1;
+	public String coding = "&a%time%&7(&6%shortname%&7) "; 
+	public int complexity = 10;
 	public String message = "%prefix% &cSorry, please wait %cooldown%&7 &cto use that command again!";
 	
 	
@@ -58,12 +58,6 @@ public class Cooldown extends Config{
 		 
 	}
 
-	@Override
-	public Configuration configuration() {
-		// TODO Auto-generated method stub
-		return Configuration.COOLDOWN;
-	}
-	
 	@Override
 	public void initialize() {
 		this.coding = this.getConfiguration().getString("Cooldown.display.coding");

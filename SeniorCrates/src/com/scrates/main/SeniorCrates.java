@@ -11,12 +11,14 @@ import com.scrates.config.ConfigManager;
 import com.scrates.cooldown.CooldownManager;
 import com.scrates.cooldown.CooldownTick;
 import com.scrates.events.EventHandler;
+import com.scrates.userprofiles.UserProfiles;
+import com.scrates.utils.MessageUtils;
 
 
 public class SeniorCrates extends JavaPlugin implements Listener{
 
 
-    public static SeniorCrates instance;
+    private static SeniorCrates instance;
     public com.scrates.commands.CommandManager CommandManager;
     public ConfigManager configManager;
     public EventHandler eventHandler;
@@ -24,16 +26,18 @@ public class SeniorCrates extends JavaPlugin implements Listener{
     public CooldownTick cooldownTick;
 	public File ParentFolder;
 	
+	public ServerVersion version;
+	public UserProfiles userProfiles;
+	
 	@Override
 	public void onEnable(){
 		
-		ParentFolder = getDataFolder();
-	    instance = this;
+		SeniorCrates.instance = this;
 		
-	    configManager = new ConfigManager();
-	    configManager.setup(this);
+		ParentFolder = getDataFolder();
 	    
-	    this.reload();
+	    this.configManager = new ConfigManager();
+	    this.configManager.setup(this);
 	    
 	    eventHandler = new EventHandler();
 	    eventHandler.setup();
@@ -42,17 +46,30 @@ public class SeniorCrates extends JavaPlugin implements Listener{
 
 	    this.cooldownTick = new CooldownTick();
 	    this.cooldownTick.schedule();
-	    
+
 	    this.CommandManager = new com.scrates.commands.CommandManager();
 	    this.CommandManager.setup(this);
-
+	    
+	    this.version = new ServerVersion();
+	    this.userProfiles = new UserProfiles();
+	    
+	    try {
+		    this.userProfiles.connect();	
+	    }catch (Exception e) {
+	    	e.printStackTrace();
+	    	MessageUtils.sendConsoleMessage("&c&lPLEASE UPDATE YOUR \"DATABASE.YML\" FILE TO CONTINUE USING THE PLUGIN.");
+	    	Bukkit.getServer().shutdown();
+	    }
+	    
 	}
 	
 	
 	@Override
 	public void onDisable(){
+		this.configManager.crates.update();
+		this.userProfiles.disconnect();
 		this.eventHandler = null;
-		HandlerList.getRegisteredListeners(instance);
+		HandlerList.getRegisteredListeners(this);
 	}
 	
 	public static void Log(String msg){
@@ -69,6 +86,5 @@ public class SeniorCrates extends JavaPlugin implements Listener{
 	public static SeniorCrates getInstance() {
 		return instance;
 	}
-		
 	
 }

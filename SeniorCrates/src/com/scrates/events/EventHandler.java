@@ -11,10 +11,11 @@ public class EventHandler {
 
     public List<SubEvent> events = new ArrayList<SubEvent>();
 	
-    private Plugin plugin = SeniorCrates.instance;
+    private Plugin plugin = SeniorCrates.getInstance();
     
 	public void setup() {
 		this.events.add(new InputHandler());
+		this.events.add(new CrateUse());
 		this.events.forEach(i -> plugin.getServer().getPluginManager().registerEvents(i, plugin));
 	}
 	

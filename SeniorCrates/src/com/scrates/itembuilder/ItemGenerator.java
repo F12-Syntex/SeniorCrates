@@ -15,6 +15,11 @@ public class ItemGenerator extends ItemContructor{
 		return item;
 	}
 	
+	public static ItemGenerator getInstance(ItemStack itemstack) {
+		ItemGenerator item = new ItemGenerator(itemstack);
+		return item;
+	}
+	
 	@Override
 	public ItemStack get() {
 		return this.itemStack;

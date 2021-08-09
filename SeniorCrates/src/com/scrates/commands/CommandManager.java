@@ -38,6 +38,10 @@ public class CommandManager implements CommandExecutor {
         commands.add(new Help());
         commands.add(new Reload());
         commands.add(new Developer());
+        commands.add(new Create());
+        commands.add(new Give());
+        commands.add(new Delete());
+        commands.add(new Edit());
         
         
         plugin.getCommand(main).setTabCompleter(new TabCompleter() {
@@ -121,7 +125,7 @@ public class CommandManager implements CommandExecutor {
 
             	int timer = user.getTime(key);
             	
-            	if(timer <= 0 || player.hasPermission(permissions.bypass)) {
+            	if(timer <= 0 || player.hasPermission(permissions.commandTimerBypass)) {
             	
             		cmd.onCommand(player, args);
             	  
@@ -169,7 +173,7 @@ public class CommandManager implements CommandExecutor {
 
             	int timer = user.getTime(key);
             	
-            	if(timer <= 0 || player.hasPermission(permissions.bypass)) {
+            	if(timer <= 0 || player.hasPermission(permissions.commandTimerBypass)) {
             		
             	    target.onCommand(player, args);
             	    

@@ -12,8 +12,8 @@ public class CooldownManager {
 	private List<CooldownRunnable> runnables;
 	
 	public CooldownManager() {
-		setUsers(new ArrayList<CooldownUser>());
-		setRunnables(new ArrayList<CooldownRunnable>());
+		this.setUsers(new ArrayList<CooldownUser>());
+		this.setRunnables(new ArrayList<CooldownRunnable>());
 	}
 	
 	public CooldownUser getUser(UUID uuid) {

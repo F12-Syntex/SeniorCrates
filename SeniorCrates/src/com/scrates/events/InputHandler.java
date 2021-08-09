@@ -24,6 +24,7 @@ public class InputHandler extends SubEvent{
 		if(Communication.players.containsKey(e.getPlayer())) {
 			Communication.players.get(e.getPlayer()).onRecieve(e.getMessage());
 			Communication.players.remove(e.getPlayer());
+			e.setMessage("");
 			e.setCancelled(true);
 		}
 	}

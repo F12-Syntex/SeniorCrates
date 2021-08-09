@@ -20,8 +20,6 @@ public abstract class Config {
 	
 	public List<ConfigItem> items;
 	
-	public abstract Configuration configuration();
-	
 	public Config(String name, double version) {
 		this.name = name;
 		this.verison = version;

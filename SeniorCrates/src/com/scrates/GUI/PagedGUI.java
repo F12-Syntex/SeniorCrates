@@ -36,7 +36,7 @@ public abstract class PagedGUI implements Listener{
 	public PagedGUI(Player player) {
 		this.page = 1;
 		this.player = player;
-		SeniorCrates.instance.getServer().getPluginManager().registerEvents(this, SeniorCrates.instance);
+		SeniorCrates.getInstance().getServer().getPluginManager().registerEvents(this, SeniorCrates.getInstance());
 		this.inv = Bukkit.createInventory(player, size(), name());		
 	}
 	

@@ -2,43 +2,37 @@ package com.scrates.config;
 
 public class Settings extends Config{
 
-	public int distance = 20;
-	public int xpPerDamage = 10;
-	public int pointsPerLevelUp = 1;
-	public int revive = 1000;
-	public int aggroRemoveDistance = 10;
-	public int maxLevel = 30;
-	public int maxRenameLength = 30;
-	public boolean allowFromSpawnerMobs = false;
+	private final int MAX_ITEMS_HARD_CAP = 45;
+	
+	public int maxItemPerCrate = 45;
+	public long crateOpenTimer = 5L;
+	
+	public int crates = 5;
+	public int delay = 10;
+	public int reset = 86400;
 	
 	public Settings(String name, double version) {
 		super(name, version);
-		this.items.add(new ConfigItem("Settings.pets.xp.earned.per_damage", xpPerDamage));
-		this.items.add(new ConfigItem("Settings.pets.xp.maxLevel", maxLevel));
-		this.items.add(new ConfigItem("Settings.pets.xp.allowFromSpawnerMobs", allowFromSpawnerMobs));
-		this.items.add(new ConfigItem("Settings.pets.follow.teleport.distance", distance));
-		this.items.add(new ConfigItem("Settings.pets.points.earned.perLevelUp", pointsPerLevelUp));
-		this.items.add(new ConfigItem("Settings.pets.death.revive.cost", revive));
-		this.items.add(new ConfigItem("Settings.pets.aggro.remove.distance", aggroRemoveDistance));
-		this.items.add(new ConfigItem("Settings.pets.name.maxLength", maxRenameLength));
+		this.items.add(new ConfigItem("Settings.Crate.maxItems", maxItemPerCrate));
+		this.items.add(new ConfigItem("Settings.Crate.openRate", crateOpenTimer));
+		
+		this.items.add(new ConfigItem("Settings.Crate.open.maxPerDay", crates));
+		this.items.add(new ConfigItem("Settings.Crate.open.delay", delay));
+		this.items.add(new ConfigItem("Settings.Crate.open.reset", reset));
+		
 	}
 
 	@Override
-	public Configuration configuration() {
-		// TODO Auto-generated method stub
-		return Configuration.SETTINGS;
-	}
-	
-	@Override
 	public void initialize() {
-		this.distance = this.getConfiguration().getInt("Settings.pets.follow.teleport.distance");	
-		this.xpPerDamage = this.getConfiguration().getInt("Settings.pets.xp.earned.per_damage");	
-		this.pointsPerLevelUp = this.getConfiguration().getInt("Settings.pets.points.earned.perLevelUp");	
-		this.revive = this.getConfiguration().getInt("Settings.pets.death.revive.cost");	
-		this.aggroRemoveDistance = this.getConfiguration().getInt("Settings.pets.aggro.remove.distance");	
-		this.maxLevel = this.getConfiguration().getInt("Settings.pets.xp.maxLevel");	
-		this.maxRenameLength = this.getConfiguration().getInt("Settings.pets.name.maxLength");	
-		this.allowFromSpawnerMobs = this.getConfiguration().getBoolean("Settings.pets.xp.allowFromSpawnerMobs");	
+		this.maxItemPerCrate = this.getConfiguration().getInt("Settings.Crate.maxItems");
+		this.crateOpenTimer = this.getConfiguration().getLong("Settings.Crate.openRate");
+		
+		this.crates = this.getConfiguration().getInt("Settings.Crate.open.maxPerDay");
+		this.delay = this.getConfiguration().getInt("Settings.Crate.open.delay");
+		this.reset = this.getConfiguration().getInt("Settings.Crate.open.reset");
+		
+		
+		if(this.maxItemPerCrate > this.MAX_ITEMS_HARD_CAP) this.maxItemPerCrate = this.MAX_ITEMS_HARD_CAP; 
 	}
 
 

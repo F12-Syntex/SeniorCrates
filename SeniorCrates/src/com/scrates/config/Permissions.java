@@ -4,33 +4,35 @@ public class Permissions extends Config{
 
 	public String shop = "bukkit.command.help";
 	public String basic = "bukkit.command.help";
-	public String admin = "battlepets.admin";
-	public String bypass = "battlepets.timer.bypass";
-	public String reload = "battlepets.admin.reload";
-	public String configure = "battlepets.admin.configure";
-	public String defaultShop = "battlepets.admin.default.shop";
-	public String inventory = "bukkit.command.help";
-	public String set = "battlepets.admin.set";
+	public String admin = "seniorcrates.admin";
+	public String commandTimerBypass = "seniorcrates.timer.bypass";
+	public String reload = "seniorcrates.admin.reload";
+	public String set = "seniorcrates.admin.set";
+	
+	public String create = "seniorcrates.admin.create";
+	public String delete = "seniorcrates.admin.delete";
+	public String edit = "seniorcrates.admin.edit";
+	public String give = "seniorcrates.admin.give";
+	public String bypass = "seniorcrates.admin.bypass";
 	
 	public Permissions(String name, double version) {
 		super(name, version);
 
 		this.items.add(new ConfigItem("Permissions.everyone.basic", basic));
 		this.items.add(new ConfigItem("Permissions.everyone.shop", shop));
-		this.items.add(new ConfigItem("Permissions.everyone.inventory", inventory));
 		
 		this.items.add(new ConfigItem("Permissions.administration.admin", admin));
-		this.items.add(new ConfigItem("Permissions.administration.timer_bypass", bypass));
+		this.items.add(new ConfigItem("Permissions.administration.commad.timer_bypass", commandTimerBypass));
 		this.items.add(new ConfigItem("Permissions.administration.reload", reload));
-		this.items.add(new ConfigItem("Permissions.administration.configure", configure));
-		this.items.add(new ConfigItem("Permissions.administration.defualt", defaultShop));
 		this.items.add(new ConfigItem("Permissions.administration.set", set));
-	}
-
-	@Override
-	public Configuration configuration() {
-		// TODO Auto-generated method stub
-		return Configuration.PERMISSIONS;
+		
+		this.items.add(new ConfigItem("Permissions.administration.crate.create", create));
+		this.items.add(new ConfigItem("Permissions.administration.crate.delete", delete));
+		this.items.add(new ConfigItem("Permissions.administration.crate.edit", edit));
+		this.items.add(new ConfigItem("Permissions.administration.crate.give", give));
+		this.items.add(new ConfigItem("Permissions.administration.crate.bypass", bypass));
+		
+		
 	}
 	
 	@Override
@@ -38,12 +40,18 @@ public class Permissions extends Config{
 		this.shop = this.getConfiguration().getString("Permissions.everyone.shop");
 		this.basic = this.getConfiguration().getString("Permissions.everyone.basic");
 		this.admin = this.getConfiguration().getString("Permissions.administration.admin");
-		this.bypass = this.getConfiguration().getString("Permissions.administration.timer_bypass");
+		this.commandTimerBypass = this.getConfiguration().getString("Permissions.administration.commad.timer_bypass");
 		this.reload = this.getConfiguration().getString("Permissions.administration.reload");
-		this.configure = this.getConfiguration().getString("Permissions.administration.configure");
-		this.defaultShop = this.getConfiguration().getString("Permissions.administration.defualt");
-		this.inventory = this.getConfiguration().getString("Permissions.everyone.inventory");
+		this.create = this.getConfiguration().getString("Permissions.administration.configure");
 		this.set = this.getConfiguration().getString("Permissions.administration.set");
+		
+		this.create = this.getConfiguration().getString("Permissions.administration.crate.create");
+		this.delete = this.getConfiguration().getString("Permissions.administration.crate.delete");
+		this.edit = this.getConfiguration().getString("Permissions.administration.crate.edit");
+		this.give = this.getConfiguration().getString("Permissions.administration.crate.give");
+		this.bypass = this.getConfiguration().getString("Permissions.administration.crate.bypass");
+		
+		
 	}
 
 

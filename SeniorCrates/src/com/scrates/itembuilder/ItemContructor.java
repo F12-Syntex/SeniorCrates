@@ -1,5 +1,6 @@
 package com.scrates.itembuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.enchantments.Enchantment;
@@ -52,6 +53,29 @@ public abstract class ItemContructor {
 		return this;
 	}
 	
+	public ItemContructor setLore(String... lore) {
+		ItemMeta meta = this.itemStack.getItemMeta();
+		meta.setLore(ComponentBuilder.createLore(lore));
+		this.itemStack.setItemMeta(meta);
+		return this;
+	}
+	
+	public ItemContructor addLore(String... lore) {
+		ItemMeta meta = this.itemStack.getItemMeta();
+		
+		List<String> newLore = new ArrayList<String>();
+		
+		if(meta.hasLore()) {
+			newLore = meta.getLore();
+		}
+		
+		newLore.addAll(ComponentBuilder.createLore(lore));
+		
+		meta.setLore(ComponentBuilder.createLore(newLore));
+		this.itemStack.setItemMeta(meta);
+		return this;
+	}
+	
 	public ItemContructor addFlag(ItemFlag flag) {
 		ItemMeta meta = this.itemStack.getItemMeta();
 		meta.addItemFlags(flag);
@@ -60,7 +84,7 @@ public abstract class ItemContructor {
 	}
 	
 	public ItemContructor addEnchant(Enchantment enchant, int level) {
-		this.itemStack.addEnchantment(enchant, level);
+		this.itemStack.addUnsafeEnchantment(enchant, level);
 		return this;
 	}
 	
@@ -68,6 +92,8 @@ public abstract class ItemContructor {
 		final ItemContructor contructor = this;
 		return contructor;
 	}
+	
+	
 	
 	
 	

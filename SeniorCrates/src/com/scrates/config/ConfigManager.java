@@ -16,6 +16,8 @@ public class ConfigManager {
     public Permissions permissions;
     public Cooldown cooldown;
     public Settings settings;
+    public Crates crates;
+    public Database database;
     
     public void setup(Plugin plugin) {
     	
@@ -23,6 +25,8 @@ public class ConfigManager {
     	this.permissions = new Permissions("permissions", 1.7);
     	this.cooldown = new Cooldown("cooldown", 1.4);
     	this.settings = new Settings("settings", 1.4);
+    	this.crates = new Crates("crates", 1.4);
+    	this.database = new Database("database", 1.0);
     	
     	this.config.clear();
 
@@ -30,32 +34,30 @@ public class ConfigManager {
     	this.config.add(permissions);
     	this.config.add(cooldown);
     	this.config.add(settings);
+    	this.config.add(crates);
+    	this.config.add(database);
     	
     	this.configure(plugin, config);
-    	
-    	List<Config> data = new ArrayList<Config>();
-
-    	this.configure(plugin, data);
-
     }
 
     public void configure(Plugin plugin, List<Config> configs) {
     	for(int i = 0; i < config.size(); i++) {
     		
-    		config.get(i).setup();
+    		Config specifiedConfig = configs.get(i);
     		
-    		if(config.get(i).getConfiguration().contains("identity.version") && (config.get(i).getConfiguration().getDouble("identity.version") == config.get(i).getVerison())) {
-    			config.get(i).initialize();
+    		specifiedConfig.setup();
+    		
+    		if(specifiedConfig.getConfiguration().contains("identity.version") && (specifiedConfig.getConfiguration().getDouble("identity.version") == specifiedConfig.getVerison())) {
+    			specifiedConfig.initialize();
         		continue;
     		}
     		
-	    		File file = config.get(i).backup();
-	    	
+	    		File file = specifiedConfig.backup();
+	    		File toDelete = new File(plugin.getDataFolder(), specifiedConfig.getName() + ".yml");
+	    		toDelete.delete();
+	    		
+	    		plugin.saveResource(specifiedConfig.getName() + ".yml", false);
 
-    			new File(plugin.getDataFolder(), config.get(i).getName() + ".yml").delete();
-	    		plugin.saveResource(config.get(i).getName() + ".yml", false);
-
-	    	
        			if(file != null) {
    					final FileConfiguration oldConfig = YamlConfiguration.loadConfiguration(file);
    					
@@ -67,10 +69,9 @@ public class ConfigManager {
    						}
    					});
    		    
-   					config.get(i).setDefault();
+   					specifiedConfig.setDefault();
    					
-   		    		config.get(index).getConfiguration().set("identity.version", config.get(i).getVerison());
-   					
+   		    		config.get(index).getConfiguration().set("identity.version", specifiedConfig.getVerison());
    		    		config.get(index).save();
    		    		config.get(index).initialize();
    		    		
@@ -79,9 +80,5 @@ public class ConfigManager {
     	}
     }
     
-    
-    public Config getConfig(Configuration configuration) {
-    	return config.stream().filter(i -> i.configuration() == configuration).findFirst().get();
-    }
 
 }

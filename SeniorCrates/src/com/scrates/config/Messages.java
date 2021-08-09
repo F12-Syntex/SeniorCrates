@@ -21,7 +21,6 @@ public class Messages extends Config{
 	public String invalid_configure_command = "%prefix% &c%config% is not a valid config!";
 	public List<String> help_format = ComponentBuilder.createLore("%prefix% &b%command%&7: &c%description%", "%prefix% &bpermissions&7: &c%permission%");
 
-	
 	//public String insufficient_balance = "%prefix% &6Sorry you dont have enough money!";
 	//public String purchase_successful = "%prefix% &6Your pet has been added to your battle inventory!";
 	
@@ -45,8 +44,40 @@ public class Messages extends Config{
 		
 		//plugin_reload
 		this.updateMessages("plugin_reload", "%prefix% &creloaded!");
-
 		
+		this.updateMessages("creation_rejected", "%prefix% &cYou have canceled the creation request.");
+		this.updateMessages("creation_completed", "%prefix% &aTask completed!");
+		this.updateMessages("creation_error_hand", "%prefix% &cYou don't have anything in your hand.");
+		this.updateMessages("creation_error_exists", "%prefix% &cCrate already exists!");
+		
+		this.updateMessages("give_error_user", "%prefix% &cThis player is not online!");
+		this.updateMessages("give_error_crate", "%prefix% &cThis crate does not exist!");
+		this.updateMessages("give_error_amount", "%prefix% &cInvalid amount!");
+		this.updateMessages("give_error_inventoryfull", "%prefix% &cYour inventory is full!");
+		this.updateMessages("give_complete", "%prefix% &aYou have recieved &7%amount%x &a%crate%");
+
+		this.updateMessages("deletion_rejected", "%prefix% &cYou have canceled the deletion request.");
+		this.updateMessages("deletion_completed", "%prefix% &aTask completed!");
+		this.updateMessages("deletion_error_notexists", "%prefix% &cCrate does not exist!");
+		
+		this.updateMessages("edit_error_notexists", "%prefix% &cCrate does not exist!");
+		this.updateMessages("edit_error_setchance_notNumber", "%prefix% &cThats not a valid chance, please provide a decimal number.");
+		this.updateMessages("edit_error_setchance_cratefull", "%prefix% &cThe crate is full!");
+		this.updateMessages("edit_setchance", "%prefix% &aPlease type in the chance.");
+		this.updateMessages("edit_setchance_sucess", "%prefix% &aChance has been set!");
+		
+		this.updateMessages("open_rejected", "%prefix% &cYou have canceled the open creation request.");
+		this.updateMessages("open_completed", "%prefix% &aOpening crate! You have %crates% left for today.");
+		this.updateMessages("open_error_doesntExists", "%prefix% &cCrate doesnt exists!");
+		this.updateMessages("open_error_timer", "%prefix% &cPlease wait %cooldown%");
+		this.updateMessages("open_error_crates_max_usage", "%prefix% &cYou have used your daily limit of crates. Please wait %cooldown% to use more!");
+		
+		
+		this.updateMessages("open_item_won", "%prefix% &cYou won &7%item_name%&c with a &7%item_chance%% &cwin chance!");
+		this.updateMessages("open_item_won_nothing", "%prefix% &cYou won nothing.");
+		
+		
+		//		this.updateMessages("edit_setchance_error_notNumber", "%prefix% &cThats not a valid chance, please provide a decimal number.");
 		
 		this.items.add(new ConfigItem("Messages.contents", messages));
 		
@@ -56,13 +87,6 @@ public class Messages extends Config{
 		HashMap<String, String> message = new HashMap<String, String>();
 		message.put(key, data);
 		this.messages.add(message);
-	}
-	
-
-	@Override
-	public Configuration configuration() {
-		// TODO Auto-generated method stub
-		return Configuration.MESSAGES;
 	}
 	
 	@Override
@@ -92,6 +116,17 @@ public class Messages extends Config{
 	
 	public void send(Player player, String key) {
 		MessageUtils.sendRawMessage(player, this.getMessage(key));
+	}
+	
+	public void send(Player player, String key, Map<String, String> placeholders) {
+		
+		String messageToSend = this.getMessage(key);
+		
+		for(String replace : placeholders.keySet()) {
+			messageToSend = messageToSend.replace(replace, placeholders.get(replace));
+		}
+		
+		MessageUtils.sendRawMessage(player, messageToSend);
 	}
 	
 	public String getMessage(String key) {
